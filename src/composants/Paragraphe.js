@@ -14,8 +14,8 @@ class Paragraphe extends React.Component {
             <div className="p-2 d-grid gap-2 ">
                 <PartTitle titre="Paragraphe"></PartTitle>
 
-                <input className="  form-control" type='text' placeholder="Entre le paragraphe"
-                    ref={this.props.reference} id='paragraphe' />
+                <textarea className="  form-control" type='text' placeholder="Entre le paragraphe"
+                    ref={this.props.reference} id='paragraphe' style={{ height: '120px' }} />
                 <button type="button" className=' col-6 ms-auto btn btn-danger ' onClick={() => this.props.onDeleteElt(this.state.key)}> Supprimer</button>
                 <br />
             </div>

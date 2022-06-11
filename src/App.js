@@ -74,7 +74,7 @@ class App extends React.Component {
           }
 
           if (i[1].current.id === 'liste') {
-            valeur += formatListe(i[1].current.value.split('\n'))
+            valeur += formatListe(i[1].current.value)
           }
           if (i[1].current.id === 'video') {
             valeur += formatVideo(i[1].current.value)
@@ -202,7 +202,17 @@ class App extends React.Component {
 
 
 function trf_paragraphe(params) {
-  return ('<p>\n\t' + params + "\n</p>\n\n");
+  let t = params.split('\n')
+  let t1 =[]
+  t.forEach(element => {
+    if (element.length !==0) {
+      t1.push('<p>\n\t' + element + '\n</p>\n\n')
+    }
+
+  });
+
+  return  t1.join(' ');
+    
 }
 
 
@@ -227,8 +237,10 @@ function formatListe(arr) {
   let ul = '<ul class="list-styled list-bullet-primary">'
   let ulFin = '\n</ul>\n\n'
   let t = []
-  arr.forEach(element => {
-    t.push('\n\t<li>' + element + '</li>')
+  arr.split('\n').forEach(element => {
+    if (element.length !==0) {
+      t.push('\n\t<li>' + element + '</li>')      
+    }
   });
   let res = ul + t.join(' ') + ulFin
   return res
