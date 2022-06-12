@@ -100,13 +100,15 @@ class App extends React.Component {
 
       //ajout sous titre
       if (choix === 0) {
+        //cree une ref pour l'object  suivre, et on l'ajoute dans le tableau de reference 
         this.Ref.set(this.state.increment_nbre_elts, [React.createRef(), React.createRef()])
-        //on ajoute a notre map un composant sous titre 
+
+        //on passe la ref au composant et on stoque ce composant dan la variable elt_to_add
         let elt_to_add = <SousTitre onDeleteElt={this.deleteElt} givenKey={this.state.increment_nbre_elts}
           reference1={this.Ref.get(this.state.increment_nbre_elts)[0]} key={this.state.increment_nbre_elts}
           getNumTitle={this.reference_du_numero_de_titre} reference2={this.Ref.get(this.state.increment_nbre_elts)[1]} />
 
-        //ajout de l'element  au map 
+        //ajout de le composant au map cle = l'etat de la variable d'incrementation  valeur => composant crée
         this.Map_All_Elt.set(this.state.increment_nbre_elts, elt_to_add)
       }
 
@@ -122,49 +124,40 @@ class App extends React.Component {
         this.Map_All_Elt.set(this.state.increment_nbre_elts, elt_to_add)
       }
 
+      // choix 2 pour ajouter une liste  
       if (choix === 2) {
         this.Ref.set(this.state.increment_nbre_elts, React.createRef())
 
-        //on ajoute a notre map une composant paragraphe
         let elt_to_add = <Liste onDeleteElt={this.deleteElt} givenKey={this.state.increment_nbre_elts}
           reference={this.Ref.get(this.state.increment_nbre_elts)} key={this.state.increment_nbre_elts} />
 
-        //ajout de l'element  au map 
         this.Map_All_Elt.set(this.state.increment_nbre_elts, elt_to_add)
       }
 
+      // choix 3 pour ajouter une video
       if (choix === 3) {
         this.Ref.set(this.state.increment_nbre_elts, React.createRef())
 
-        //on ajoute a notre map une composant paragraphe
         let elt_to_add = <Videographie onDeleteElt={this.deleteElt} givenKey={this.state.increment_nbre_elts}
           reference={this.Ref.get(this.state.increment_nbre_elts)} key={this.state.increment_nbre_elts} />
+
         this.Map_All_Elt.set(this.state.increment_nbre_elts, elt_to_add)
       }
+
       if (choix === 4) {
         this.Ref.set(this.state.increment_nbre_elts, React.createRef())
 
-        //on ajoute a notre map une composant paragraphe
         let elt_to_add = <BoxASavoir onDeleteElt={this.deleteElt} givenKey={this.state.increment_nbre_elts}
           reference={this.Ref.get(this.state.increment_nbre_elts)} key={this.state.increment_nbre_elts} />
 
         this.Map_All_Elt.set(this.state.increment_nbre_elts, elt_to_add)
       }
-
-
-
-
       this.setState({
         increment_nbre_elts: this.state.increment_nbre_elts + 1
       })
     }
 
-
-
   }
-
-
-
 
   render() {
     return (
@@ -186,7 +179,7 @@ class App extends React.Component {
                   readOnly
                   defaultValue={this.state.valueToScreen}
                   id="floatingTextarea2"
-                  style={{ height: "700px" }}
+                  style={{ height: "1000px" }}
                 />
               </div>
             </div>
@@ -199,7 +192,7 @@ class App extends React.Component {
 
 
 
-
+// fonctions de conversion 
 
 function trf_paragraphe(params) {
   let t = params.split('\n')
