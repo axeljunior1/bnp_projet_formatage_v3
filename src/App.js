@@ -248,9 +248,9 @@ function formatVideo(iframe) {
 function FormatBosA_Savoir(textValue) {
   let table = textValue.split('\n')
   let t = []
-  t.push('<div class="bg-grey-10 p-5 mb-5" >\n\t<span class="h3 text-primary">\n\t\t')
+  t.push('<div class="bg-grey-10 p-5 mb-5" >\n\t<h3 class="text-primary">\n\t\t')
   t.push(table[0])
-  t.push('\n\t</span> \n\t<p>\n\t\t')
+  t.push('\n\t</h3> \n\t<p>\n\t\t')
   for (let index = 1; index < table.length; index++) {
     t.push(table[index])
   }
