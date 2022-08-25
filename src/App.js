@@ -192,73 +192,77 @@ class App extends React.Component {
 
 
 
+
 // fonctions de conversion 
 
+// cette fonction recupere un texte et y ajouje des balises html de paragraphe necessaires 
 function trf_paragraphe(params) {
-  let t = params.split('\n')
-  let t1 =[]
-  t.forEach(element => {
-    if (element.length !==0) {
-      t1.push('<p>\n\t' + element + '\n</p>\n\n')
+  let table_paragraphe = params.split('\n') // transforme le texte en tableau de paragraphe
+  let resultat_paragraphes = []
+  table_paragraphe.forEach(element => {
+    if (element.length !== 0) { // on se rassure de ne pas avoir de paragraphe vide  
+      resultat_paragraphes.push('<p>\n\t' + element + '\n</p>\n\n') // à chaque paragraphe on ajoute la balise de paragraphe
     }
-
   });
 
-  return  t1.join(' ');
-    
+  return resultat_paragraphes.join(' '); // on retourne le tableau (avec tous les element joints) formaté en html 
+
 }
 
+// formatter un sous titre  
 
-function trf_sousTitre(params, num) {
-
+function trf_sousTitre(params, num) { // fonction qui prend en parametre un titre et un numero de titre 
+  //  se rassure de ne pas avoir d'accents dans notre titre afin de constituer l'id du sous titre  
   let id = params.replaceAll('é', 'e')
-  id = id.replaceAll('è', 'e')
-  id = id.replaceAll('à', 'a')
-  id = id.replaceAll('ô', 'o')
-  id = id.replace(/[^A-Za-z0-9\s]/g, "").replace(/\s{2,}/g, " ").trim();
-  id = id.replaceAll(" ", "-")
-  id = id.toLowerCase();
-  let v = '<div class="d-flex">\n\t<span class="title-number h3 text-fuchsia z-depth-5">\n\t\t' + num + '\n\t</span>\n\t<h2 class="text-primary"'
+    .replaceAll('è', 'e')
+    .replaceAll('à', 'a')
+    .replaceAll('ô', 'o')
+    .replace(/[^A-Za-z0-9\s]/g, "").replace(/\s{2,}/g, " ").trim() // remplace les caracteres non alphanumerique pas "", 
+    // remplace les espaces multiple par les empacement et les espaces au debut et a la fin avec la methode trim() , // 
+    .replaceAll(" ", "-") // replace les espaces par les tirets
+    .toLowerCase(); // texte en minuscule 
+  let format_title = '<div class="d-flex">\n\t<span class="title-number h3 text-fuchsia z-depth-5">\n\t\t' + num + '\n\t</span>\n\t<h2 class="text-primary"'
     + 'id="' + id + '">\n\t\t' + params + '\n\t</h2>\n</div>\n\n'
 
   return (
-    v
+    format_title
   );
 }
 
-function formatListe(arr) {
-  let ul = '<ul class="list-styled list-bullet-primary">'
-  let ulFin = '\n</ul>\n\n'
-  let t = []
-  arr.split('\n').forEach(element => {
-    if (element.length !==0) {
-      t.push('\n\t<li>' + element + '</li>')      
-    }
-  });
-  let res = ul + t.join(' ') + ulFin
-  return res
+function formatListe(text) {
+    let ul_debut = '<ul class="list-styled list-bullet-primary">'
+    let ul_Fin = '\n</ul>\n\n'
+    let liste_elt_li = []
+    text.split('\n').forEach(element => { //chaque paragraphe du texte constitue un element de liste 
+      if (element.length !== 0) {
+          liste_elt_li.push('\n\t<li>' + element + '</li>')// si l'element est non nul, on l'entoure des balises <li> ... </li>   
+      }
+    });
+    let result_liste_html = ul_debut +  liste_elt_li.join(' ') + ul_Fin // ajout des <ul> autour de tous nos <li> precedents
+    return result_liste_html
+  
+  }
 
-}
+
+  function FormatBosA_Savoir(textValue) {
+    let table_paragraphe = textValue.split('\n')
+    let table_resultat = []
+    table_resultat.push('<div class="bg-grey-10 p-5 mb-5" >\n\t<h3 class="text-primary">\n\t\t')
+    table_resultat.push(table_paragraphe[0])
+    table_resultat.push('\n\t</h3> \n\t<p>\n\t\t')
+    for (let index = 1; index < table_paragraphe.length; index++) {
+      table_resultat.push(table_paragraphe[index])
+    }
+    table_resultat.push('\n\t</p> \n</div>\n')
+    return table_resultat.join(' ')
+  }
+
+
 
 function formatVideo(iframe) {
-  //A modifier pour entrer la bonne valeur et le style qui va avec les iframes 
-  return iframe + '\n'
-}
-
-function FormatBosA_Savoir(textValue) {
-  let table = textValue.split('\n')
-  let t = []
-  t.push('<div class="bg-grey-10 p-5 mb-5" >\n\t<h3 class="text-primary">\n\t\t')
-  t.push(table[0])
-  t.push('\n\t</h3> \n\t<p>\n\t\t')
-  for (let index = 1; index < table.length; index++) {
-    t.push(table[index])
+    //A modifier pour entrer la bonne valeur et le style qui va avec les iframes 
+    return iframe + '\n'
   }
-  t.push('\n\t</p> \n</div>\n')
-
-  return t.join(' ')
-
-}
 
 export default App;
 
