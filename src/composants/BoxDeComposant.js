@@ -24,7 +24,7 @@ const BoxDeComposant = (props) => {
                     <button type="button" className=" text-bold col-12 btn btn-outline-primary" onClick={() => props.choix_btn(4)}> Box Bon a savoir </button>
                 </div>
                 <div className="  px-1 pt-5">
-                    <button type="button" className="text-bold col-12 btn btn-success" onClick={() => props.choix_btn(5)}> Valider le Formulaire </button>
+                    <a type="button" className="text-bold col-12 btn btn-success" href="#floatingTextarea2" onClick={() => props.choix_btn(5)}> Valider le Formulaire </a>
                 </div>
             </div>
         </div>
