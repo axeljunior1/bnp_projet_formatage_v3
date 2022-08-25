@@ -70,25 +70,25 @@ class App extends React.Component {
         if (i[1].length !== 2 && i[1].current.value && i[1].current.value !== "") {
 
           if (i[1].current.id === 'paragraphe') {
-            valeur += trf_paragraphe(i[1].current.value)
+            valeur += format_paragraphe(i[1].current.value)
           }
 
           if (i[1].current.id === 'liste') {
-            valeur += formatListe(i[1].current.value)
+            valeur += format_liste(i[1].current.value)
           }
           if (i[1].current.id === 'video') {
             valeur += formatVideo(i[1].current.value)
           }
 
           if (i[1].current.id === 'asavoir') {
-            valeur += FormatBosA_Savoir(i[1].current.value)
+            valeur += Format_Box_A_Savoir(i[1].current.value)
           }
         }
         if (i[1].length === 2 && i[1][0].current.value !== "") {
           // certains composants necessite de leur passer deux ref donc on y accede comme dans un tableau a 2 dimenssions 
 
           if (i[1][0].current.id === 'sous titre') {
-            valeur += trf_sousTitre(i[1][0].current.value, i[1][1].current.value)
+            valeur += format_sous_titre(i[1][0].current.value, i[1][1].current.value)
           }
         }
       }
@@ -191,45 +191,42 @@ class App extends React.Component {
 }
 
 
+// fonctions de conversion. 
 
-
-// fonctions de conversion 
-
-// cette fonction recupere un texte et y ajouje des balises html de paragraphe necessaires 
-function trf_paragraphe(params) {
+// cette fonction récupère un texte et y ajoute des balises html de paragraphe necessaires 
+function format_paragraphe(params) {
   let table_paragraphe = params.split('\n') // transforme le texte en tableau de paragraphe
   let resultat_paragraphes = []
   table_paragraphe.forEach(element => {
-    if (element.length !== 0) { // on se rassure de ne pas avoir de paragraphe vide  
-      resultat_paragraphes.push('<p>\n\t' + element + '\n</p>\n\n') // à chaque paragraphe on ajoute la balise de paragraphe
+    if (element.length !== 0) { //  paragraphe vide ?  
+      resultat_paragraphes.push('<p>\n\t' + element + '\n</p>\n\n') // add <p> ... </p> à chaque paragraphe 
     }
   });
 
-  return resultat_paragraphes.join(' '); // on retourne le tableau (avec tous les element joints) formaté en html 
+  return resultat_paragraphes.join(' '); // joint tous les paragraphes
 
 }
 
-// formatter un sous titre  
-
-function trf_sousTitre(params, num) { // fonction qui prend en parametre un titre et un numero de titre 
-  //  se rassure de ne pas avoir d'accents dans notre titre afin de constituer l'id du sous titre  
+// formater un sous titre  
+function format_sous_titre(params, num) { // fonction qui prend en parametre un titre et un numero de titre 
+  //  remplace les accents dans notre titre afin de constituer l'id du sous titre  
   let id = params.replaceAll('é', 'e')
     .replaceAll('è', 'e')
     .replaceAll('à', 'a')
     .replaceAll('ô', 'o')
-    .replace(/[^A-Za-z0-9\s]/g, "").replace(/\s{2,}/g, " ").trim() // remplace les caracteres non alphanumerique pas "", 
-    // remplace les espaces multiple par les empacement et les espaces au debut et a la fin avec la methode trim() , // 
-    .replaceAll(" ", "-") // replace les espaces par les tirets
+    .replace(/[^A-Za-z0-9\s]/g, "").replace(/\s{2,}/g, " ").trim() // remplace les caracteres non alphanumerique par "", 
+    // "  " = " " , retire les espaces au debut et de  fin avec la methode trim() , // 
+    .replaceAll(" ", "-") // " " == "-"
     .toLowerCase(); // texte en minuscule 
   let format_title = '<div class="d-flex">\n\t<span class="title-number h3 text-fuchsia z-depth-5">\n\t\t' + num + '\n\t</span>\n\t<h2 class="text-primary"'
-    + 'id="' + id + '">\n\t\t' + params + '\n\t</h2>\n</div>\n\n'
+    + 'id="' + id + '">\n\t\t' + params + '\n\t</h2>\n</div>\n\n' // ajouts des balises autour des valeurs de variable 
 
   return (
     format_title
   );
 }
 
-function formatListe(text) {
+function format_liste(text) {
     let ul_debut = '<ul class="list-styled list-bullet-primary">'
     let ul_Fin = '\n</ul>\n\n'
     let liste_elt_li = []
@@ -243,9 +240,9 @@ function formatListe(text) {
   
   }
 
-
-  function FormatBosA_Savoir(textValue) {
-    let table_paragraphe = textValue.split('\n')
+// le premier paragraphe du texte en paramettre constitue le titre de du box
+  function Format_Box_A_Savoir(textValue) {
+    let table_paragraphe = textValue.split('\n') 
     let table_resultat = []
     table_resultat.push('<div class="bg-grey-10 p-5 mb-5" >\n\t<h3 class="text-primary">\n\t\t')
     table_resultat.push(table_paragraphe[0])
@@ -258,12 +255,9 @@ function formatListe(text) {
   }
 
 
-
 function formatVideo(iframe) {
     //A modifier pour entrer la bonne valeur et le style qui va avec les iframes 
     return iframe + '\n'
   }
 
 export default App;
-
-
