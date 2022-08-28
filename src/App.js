@@ -257,9 +257,11 @@ function format_liste(text) {
 
 function format_video(link_and_title) {
   let link = link_and_title.split("\n")[0]
+  
   let video_title = link_and_title.split("\n")[1]
+  
   let iframe = '<div class="video-container my-5"><iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="" frameborder="0" src="' + link + '"  title="Video youtube: '+ video_title+'" style="width: 560; height: 315;"></iframe></div> \n <style type="text/css">.video-container { \n \t position: relative; \n \t padding-bottom: 56.25%; \n \t height: 0;    \n \t overflow: hidden;   \n \t  }   \n \t .video-container iframe,   \n \t .video-container object,   \n \t .video-container embed {   \n \t position: absolute;   \n \t top: 0;   \n \t left: 0;  \n \t  width: 100%;  \n \t  height: 100%;  \n \t  }\n </style>'
-    //A modifier pour entrer la bonne valeur et le style qui va avec les iframes 
+    
     return iframe + '\n' 
   }
 
