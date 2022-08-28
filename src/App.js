@@ -77,7 +77,7 @@ class App extends React.Component {
             valeur += format_liste(i[1].current.value)
           }
           if (i[1].current.id === 'video') {
-            valeur += formatVideo(i[1].current.value)
+            valeur += format_video(i[1].current.value)
           }
 
           if (i[1].current.id === 'asavoir') {
