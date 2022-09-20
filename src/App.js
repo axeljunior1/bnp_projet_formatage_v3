@@ -174,13 +174,9 @@ class App extends React.Component {
 
             <div className="col-6">
               <div className="form-floating">
-                <textarea
-                  className="form-control"
-                  readOnly
+                <textarea className="form-control" readOnly
                   defaultValue={this.state.valueToScreen}
-                  id="floatingTextarea2"
-                  style={{ height: "1000px" }}
-                />
+                  id="floatingTextarea2" style={{ height: "1000px" }}/>
               </div>
             </div>
           </div>
