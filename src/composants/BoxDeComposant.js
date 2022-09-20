@@ -1,8 +1,6 @@
 import React from 'react';
 
 const BoxDeComposant = (props) => {
-
-
     return (
         <div className=''>
             <div className="  px-1">
@@ -30,5 +28,4 @@ const BoxDeComposant = (props) => {
         </div>
     );
 };
-
 export default BoxDeComposant;
